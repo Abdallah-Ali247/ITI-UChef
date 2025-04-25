@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMealById } from '../../store/slices/mealSlice';
-import { addToCart } from '../../store/slices/cartSlice';
+import Swal from 'sweetalert2';
+
+import { addToCartWithConfirmation } from '../../utils/cartUtils';
 import ReviewList from '../../components/reviews/ReviewList';
 
 const MealDetail = () => {
@@ -24,26 +26,39 @@ const MealDetail = () => {
     }
   };
   
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!currentMeal) return;
     
-    dispatch(addToCart({
-      item: {
-        id: currentMeal.id,
-        name: currentMeal.name,
-        price: currentMeal.base_price,
-        image: currentMeal.image,
-        type: 'regular',
-        quantity,
-        specialInstructions
-      },
-      restaurantId: currentMeal.restaurant,
-      restaurantName: currentMeal.restaurant_name
-    }));
+    // Create the cart item
+    const cartItem = {
+      id: currentMeal.id,
+      name: currentMeal.name,
+      price: currentMeal.base_price,
+      image: currentMeal.image,
+      type: 'regular',
+      quantity,
+      specialInstructions
+    };
     
-    // Show success message and navigate to cart
-    alert(`${currentMeal.name} added to cart!`);
-    navigate('/cart');
+    // Use the utility function that handles restaurant conflicts
+    const added = await addToCartWithConfirmation(
+      cartItem,
+      currentMeal.restaurant,
+      currentMeal.restaurant_name
+    );
+    
+    // Only show success and navigate if the item was added
+    if (added) {
+      // Show success message with SweetAlert2 instead of native alert
+      await Swal.fire({
+        icon: 'success',
+        title: 'Added to Cart',
+        text: `${currentMeal.name} added to cart!`,
+        timer: 2000,
+        showConfirmButton: false
+      });
+      navigate('/cart');
+    }
   };
   
   if (loading) {

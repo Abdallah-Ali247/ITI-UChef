@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getCurrentUser } from './store/slices/authSlice'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { ThemeProvider } from './contexts/ThemeContext'
 
 // Layout components
 import Header from './components/layout/Header'
@@ -36,6 +37,7 @@ import NotFound from './pages/NotFound'
 
 // CSS
 import './assets/styles/main.css'
+import './styles/themes.css'
 
 // Protected Route component
 const ProtectedRoute = ({ children }) => {
@@ -58,121 +60,123 @@ function App() {
   }, [dispatch])
 
   return (
-    <Router>
-      <div className="app-container">
-        <ToastContainer position="top-right" autoClose={3000} />
-        <Header />
-        <main className="main-content">
-          <Routes>
-            {/* Public routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/restaurants" element={<RestaurantList />} />
-            <Route path="/restaurants/:id" element={<RestaurantDetail />} />
-            <Route path="/meals/:id" element={<MealDetail />} />
-            <Route path="/meals/custom/:id" element={<CustomMealDetail />} />
-            <Route path="/top-custom-meals" element={<TopCustomMeals />} />
+    <ThemeProvider>
+      <Router>
+        <div className="app-container">
+          <ToastContainer position="top-right" autoClose={3000} />
+          <Header />
+          <main className="main-content">
+            <Routes>
+              {/* Public routes */}
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/restaurants" element={<RestaurantList />} />
+              <Route path="/restaurants/:id" element={<RestaurantDetail />} />
+              <Route path="/meals/:id" element={<MealDetail />} />
+              <Route path="/meals/custom/:id" element={<CustomMealDetail />} />
+              <Route path="/top-custom-meals" element={<TopCustomMeals />} />
             
-            {/* Protected routes */}
-            <Route path="/custom-meal/:restaurantId" element={
-              <ProtectedRoute>
-                <CustomMealBuilder />
-              </ProtectedRoute>
-            } />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={
-              <ProtectedRoute>
-                <Checkout />
-              </ProtectedRoute>
-            } />
-            <Route path="/orders" element={
-              <ProtectedRoute>
-                <OrderHistory />
-              </ProtectedRoute>
-            } />
-            <Route path="/orders/:id" element={
-              <ProtectedRoute>
-                <OrderDetail />
-              </ProtectedRoute>
-            } />
-            <Route path="/profile" element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            } />
+              {/* Protected routes */}
+              <Route path="/custom-meal/:restaurantId" element={
+                <ProtectedRoute>
+                  <CustomMealBuilder />
+                </ProtectedRoute>
+              } />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={
+                <ProtectedRoute>
+                  <Checkout />
+                </ProtectedRoute>
+              } />
+              <Route path="/orders" element={
+                <ProtectedRoute>
+                  <OrderHistory />
+                </ProtectedRoute>
+              } />
+              <Route path="/orders/:id" element={
+                <ProtectedRoute>
+                  <OrderDetail />
+                </ProtectedRoute>
+              } />
+              <Route path="/profile" element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              } />
             
-            {/* Restaurant Routes */}
-            <Route path="/restaurant-dashboard" element={
-              <ProtectedRoute>
-                <RestaurantDashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/create-restaurant" element={
-              <ProtectedRoute>
-                <CreateRestaurant />
-              </ProtectedRoute>
-            } />
-            <Route path="/add-meal" element={
-              <ProtectedRoute>
-                <AddMeal />
-              </ProtectedRoute>
-            } />
-            <Route path="/edit-meal/:mealId" element={
-              <ProtectedRoute>
-                <EditMeal />
-              </ProtectedRoute>
-            } />
-            <Route path="/add-ingredient" element={
-              <ProtectedRoute>
-                <AddIngredient />
-              </ProtectedRoute>
-            } />
-            <Route path="/edit-ingredient/:ingredientId" element={
-              <ProtectedRoute>
-                <EditIngredient />
-              </ProtectedRoute>
-            } />
+              {/* Restaurant Routes */}
+              <Route path="/restaurant-dashboard" element={
+                <ProtectedRoute>
+                  <RestaurantDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/create-restaurant" element={
+                <ProtectedRoute>
+                  <CreateRestaurant />
+                </ProtectedRoute>
+              } />
+              <Route path="/add-meal" element={
+                <ProtectedRoute>
+                  <AddMeal />
+                </ProtectedRoute>
+              } />
+              <Route path="/edit-meal/:mealId" element={
+                <ProtectedRoute>
+                  <EditMeal />
+                </ProtectedRoute>
+              } />
+              <Route path="/add-ingredient" element={
+                <ProtectedRoute>
+                  <AddIngredient />
+                </ProtectedRoute>
+              } />
+              <Route path="/edit-ingredient/:ingredientId" element={
+                <ProtectedRoute>
+                  <EditIngredient />
+                </ProtectedRoute>
+              } />
             
-            {/* Admin Dashboard */}
-            <Route path="/admin-dashboard" element={
-              <ProtectedRoute>
-                <AdminDashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/add-user" element={
-              <ProtectedRoute>
-                <AdminUserForm />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/edit-user/:id" element={
-              <ProtectedRoute>
-                <AdminUserForm isEdit={true} />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/add-restaurant" element={
-              <ProtectedRoute>
-                <CreateRestaurant isAdmin={true} />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/edit-restaurant/:id" element={
-              <ProtectedRoute>
-                <CreateRestaurant isEdit={true} isAdmin={true} />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/orders/:id" element={
-              <ProtectedRoute>
-                <OrderDetail isAdmin={true} />
-              </ProtectedRoute>
-            } />
-            
-            {/* 404 route */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+              {/* Admin Dashboard */}
+              <Route path="/admin-dashboard" element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/add-user" element={
+                <ProtectedRoute>
+                  <AdminUserForm />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/edit-user/:id" element={
+                <ProtectedRoute>
+                  <AdminUserForm isEdit={true} />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/add-restaurant" element={
+                <ProtectedRoute>
+                  <CreateRestaurant isAdmin={true} />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/edit-restaurant/:id" element={
+                <ProtectedRoute>
+                  <CreateRestaurant isEdit={true} isAdmin={true} />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/orders/:id" element={
+                <ProtectedRoute>
+                  <OrderDetail isAdmin={true} />
+                </ProtectedRoute>
+              } />
+              
+              {/* 404 route */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </ThemeProvider>
   )
 }
 

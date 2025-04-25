@@ -4,6 +4,7 @@ import restaurantReducer from './slices/restaurantSlice';
 import mealReducer from './slices/mealSlice';
 import cartReducer from './slices/cartSlice';
 import orderReducer from './slices/orderSlice';
+import cartListenerMiddleware from './middleware/cartMiddleware';
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,9 @@ export const store = configureStore({
     cart: cartReducer,
     orders: orderReducer,
   },
+  middleware: (getDefaultMiddleware) => 
+    getDefaultMiddleware()
+      .prepend(cartListenerMiddleware.middleware)
 });
 
 export default store;

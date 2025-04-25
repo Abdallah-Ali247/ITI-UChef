@@ -179,6 +179,7 @@ const authSlice = createSlice({
       state.user = null;
       state.isAuthenticated = false;
       state.error = null;
+      // Note: Cart handling is done in middleware/listeners
     },
     clearError: (state) => {
       state.error = null;

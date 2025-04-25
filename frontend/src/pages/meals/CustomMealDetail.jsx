@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { addToCart } from '../../store/slices/cartSlice';
 import ReviewList from '../../components/reviews/ReviewList';
+import Swal from 'sweetalert2';
 
-const API_URL = 'http://localhost:8000/api';
+import API_URL from '../../config/api';
+import { addToCartWithConfirmation } from '../../utils/cartUtils';
 
 const CustomMealDetail = () => {
   const { id } = useParams();
@@ -34,7 +35,7 @@ const CustomMealDetail = () => {
         
         // Fetch the custom meal details
         const mealResponse = await axios.get(`${API_URL}/meals/custom-meals/${id}/`, {
-          headers: token ? { Authorization: `Token ${token}` } : {}
+          headers: token ? { Authorization: `Bearer ${token}` } : {}
         });
         
         const mealData = mealResponse.data;
@@ -43,7 +44,7 @@ const CustomMealDetail = () => {
         
         // Fetch the ingredients for this custom meal
         const ingredientsResponse = await axios.get(`${API_URL}/meals/custom-meals/${id}/ingredients/`, {
-          headers: token ? { Authorization: `Token ${token}` } : {}
+          headers: token ? { Authorization: `Bearer ${token}` } : {}
         });
         
         setIngredients(ingredientsResponse.data);
@@ -81,7 +82,7 @@ const CustomMealDetail = () => {
       const response = await axios.patch(
         `${API_URL}/meals/custom-meals/${id}/`, 
         { is_public: !isPublic },
-        { headers: { Authorization: `Token ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       
       setIsPublic(response.data.is_public);
@@ -116,7 +117,7 @@ const CustomMealDetail = () => {
         try {
           const token = localStorage.getItem('token');
           const baseMealResponse = await axios.get(`${API_URL}/meals/meals/${customMeal.base_meal}/`, {
-            headers: token ? { Authorization: `Token ${token}` } : {}
+            headers: token ? { Authorization: `Bearer ${token}` } : {}
           });
           
           restaurantId = baseMealResponse.data.restaurant;
@@ -133,7 +134,7 @@ const CustomMealDetail = () => {
           // Get the first restaurant from the API
           const token = localStorage.getItem('token');
           const restaurantsResponse = await axios.get(`${API_URL}/restaurants/restaurants/`, {
-            headers: token ? { Authorization: `Token ${token}` } : {}
+            headers: token ? { Authorization: `Bearer ${token}` } : {}
           });
           
           if (restaurantsResponse.data && restaurantsResponse.data.length > 0) {
@@ -146,31 +147,43 @@ const CustomMealDetail = () => {
           }
         } catch (error) {
           console.error('Error fetching restaurants:', error);
-          alert('Could not determine the restaurant for this custom meal. Please try again.');
+          await Swal.fire({ icon: 'error', title: 'Error', text: 'Could not determine the restaurant for this custom meal. Please try again.' });
           return;
         }
       }
       
-      dispatch(addToCart({
-        item: {
-          customMealId: customMeal.id,
-          name: customMeal.name,
-          price: totalPrice || customMeal.base_price || 0,
-          type: 'custom',
-          quantity,
-          image: customMeal.image,
-          specialInstructions: customMeal.cooking_instructions || ''
-        },
+      // Create the cart item
+      const cartItem = {
+        customMealId: customMeal.id,  // This will become the standardized ID in our cart system
+        name: customMeal.name,
+        price: totalPrice || customMeal.base_price || 0,
+        type: 'custom',
+        quantity,
+        image: customMeal.image,
+        specialInstructions: customMeal.cooking_instructions || ''
+      };
+      
+      // Use the utility function that handles restaurant conflicts
+      const added = await addToCartWithConfirmation(
+        cartItem,
         restaurantId,
         restaurantName
-      }));
+      );
       
-      // Show success message and navigate to cart
-      alert(`${customMeal.name} added to cart!`);
-      navigate('/cart');
+      // Only show success and navigate if item was added
+      if (added) {
+        await Swal.fire({ 
+          icon: 'success', 
+          title: 'Added to Cart', 
+          text: `${customMeal.name} added to cart!`,
+          timer: 2000,
+          showConfirmButton: false 
+        });
+        navigate('/cart');
+      }
     } catch (error) {
       console.error('Error adding custom meal to cart:', error);
-      alert('Failed to add meal to cart. Please try again.');
+      await Swal.fire({ icon: 'error', title: 'Error', text: 'Failed to add meal to cart. Please try again.' });
     }
   };
   

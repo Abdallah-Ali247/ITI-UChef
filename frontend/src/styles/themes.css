@@ -1,0 +1,148 @@
+/* Theme Variables */
+
+/* Light Mode (Default) */
+:root {
+  /* Base colors - softer whites for reduced eye strain */
+  --bg-primary: #f8f9fa; /* Off-white rather than stark white */
+  --bg-secondary: #f0f2f5;
+  --bg-tertiary: #e9ecef;
+  --bg-card: #f8f9fa;
+  --bg-dropdown: #f8f9fa;
+  --bg-input: #f8f9fa;
+  
+  /* Text colors - slightly softer for better readability */
+  --text-primary: #343a40; /* Softer than pure black */
+  --text-secondary: #495057;
+  --text-tertiary: #6c757d;
+  --text-muted: #adb5bd;
+  --text-inverse: #f8f9fa;
+  
+  /* Brand colors - warmer and more muted for comfortable viewing */
+  --primary-color: #e76f51; /* Terracotta - less intense than bright orange */
+  --primary-color-hover: #f4a261; /* Soft orange on hover */
+  --primary-color-light: #f8c6b6; /* Very light terracotta */
+  --primary-color-dark: #bc4b35; /* Deeper terracotta */
+  
+  --secondary-color: #2a9d8f; /* Muted teal - easier on the eyes */
+  --secondary-color-hover: #3aafa9;
+  --secondary-color-light: #a8dadc; /* Pale teal */
+  --secondary-color-dark: #1d7874; /* Deep teal */
+  
+  --accent-color: #f9c74f; /* Muted yellow - less harsh than bright yellow */
+  --accent-color-light: #faedcd; /* Very pale yellow */
+  --accent-color-dark: #e9b44c; /* Deeper gold */
+  
+  /* Feedback colors */
+  --success-color: #4CAF50;
+  --warning-color: #FFC107;
+  --danger-color: #f44336;
+  --info-color: #2196F3;
+  
+  /* UI Elements */
+  --border-color: #e0e0e0;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  
+  /* Transitions */
+  --transition-fast: 0.2s;
+  --transition-normal: 0.3s;
+  --transition-slow: 0.5s;
+  
+  /* Border radius */
+  --border-radius-sm: 4px;
+  --border-radius: 8px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 24px;
+  --border-radius-full: 9999px;
+}
+
+/* Dark Mode */
+[data-theme='dark'] {
+  /* Base colors - warm dark tones that reduce blue light and are easier on the eyes */
+  --bg-primary: #212529; /* Slightly warmer dark gray instead of pure black */
+  --bg-secondary: #2b3035; /* Dark charcoal with slight warmth */
+  --bg-tertiary: #343a40; /* Medium charcoal */
+  --bg-card: #2b3035;
+  --bg-dropdown: #343a40;
+  --bg-input: #343a40;
+  
+  /* Text colors - high enough contrast for readability without being harsh */
+  --text-primary: #f0f0f0; /* Not fully white to reduce harshness */
+  --text-secondary: #d0d0d0;
+  --text-tertiary: #a0a0a0;
+  --text-muted: #818181;
+  --text-inverse: #212529;
+  
+  /* Brand colors - softer and warmer for dark mode comfort */
+  --primary-color: #ee8959;  /* Muted coral that's visible but not harsh */
+  --primary-color-hover: #f4a261;
+  --primary-color-light: #fbc4ab; /* Very soft peach */
+  --primary-color-dark: #db7a50;
+  
+  --secondary-color: #48cae4;  /* Softer blue-teal that stands out without eye strain */
+  --secondary-color-hover: #90e0ef;
+  --secondary-color-light: #ade8f4; /* Very light teal */
+  --secondary-color-dark: #0096c7;
+  
+  --accent-color: #ffd166;  /* Softer amber color */
+  --accent-color-light: #ffe8a3; /* Very soft yellow */
+  --accent-color-dark: #e9c46a;
+  
+  /* Feedback colors - adjusted for dark mode */
+  --success-color: #66BB6A;
+  --warning-color: #FFCA28;
+  --danger-color: #EF5350;
+  --info-color: #42A5F5;
+  
+  /* UI Elements */
+  --border-color: #3d3d3d;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Global Styles for Dark Mode Adaptations */
+[data-theme='dark'] img {
+  opacity: 0.9; /* Slightly reduce image brightness */
+  filter: brightness(0.9) contrast(0.95); /* Slightly reduce contrast for easier viewing */
+}
+
+/* Global styles for both themes */
+body {
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Additional eye-friendly settings */
+p, li, span, div {
+  line-height: 1.6; /* Improved line spacing for readability */
+  font-size: 16px; /* Minimum comfortable font size */
+}
+
+/* Reduce eye strain from large areas of bright colors */
+.card, .panel, section, article {
+  background-color: var(--bg-card);
+  border-color: var(--border-color);
+  border-radius: var(--border-radius);
+}
+
+/* Custom scrollbars for both themes */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color-light);
+  border-radius: var(--border-radius-full);
+  border: 3px solid var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-color);
+}

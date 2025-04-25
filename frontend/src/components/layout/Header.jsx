@@ -16,12 +16,49 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
-      <div className="header-container">
-        <Link to="/" className="logo">UChef</Link>
+    <header className="header" style={{
+      width: '100vw',
+      left: 0,
+      top: 0,
+      zIndex: 100,
+      position: 'fixed',
+      background: 'none',
+      padding: 0,
+      margin: 0
+    }}>
+      <div className="header-container" style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        height: '72px',
+        padding: '0 2rem',
+        minHeight: '64px',
+        width: '100vw',
+        boxSizing: 'border-box',
+      }}>
+        <Link to="/" className="logo" style={{
+          fontWeight: '800',
+          fontSize: '2rem',
+          letterSpacing: '0.03em',
+          color: 'var(--primary-color)',
+          textDecoration: 'none',
+          textShadow: '0 2px 8px rgba(255,123,59,0.08)',
+          transition: 'color 0.2s'
+        }}>UChef</Link>
         
-        <nav>
-          <ul className="nav-menu">
+        <nav style={{ flex: 1 }}>
+          <ul className="nav-menu" style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            margin: 0,
+            padding: 0,
+            listStyle: 'none',
+            justifyContent: 'flex-end',
+            width: '100%'
+          }}>
             <li className="nav-item">
               <NavLink to="/" className="nav-link">Home</NavLink>
             </li>

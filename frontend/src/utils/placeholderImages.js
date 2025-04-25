@@ -4,7 +4,7 @@
 import img from '../assets/ii.webp'
 const PLACEHOLDER_IMAGES = {
   // Default placeholder for meals
-  meal: '..',
+  meal: img,
   
   // Default placeholder for custom meals
   customMeal: img,

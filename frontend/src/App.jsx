@@ -6,6 +6,11 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ThemeProvider } from './contexts/ThemeContext'
 
+// Import AOS
+import AOS from 'aos'
+import 'aos/dist/aos.css' // AOS styles
+import './styles/themes.css' // Our theme styles
+
 // Layout components
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
@@ -37,7 +42,6 @@ import NotFound from './pages/NotFound'
 
 // CSS
 import './assets/styles/main.css'
-import './styles/themes.css'
 
 // Protected Route component
 const ProtectedRoute = ({ children }) => {
@@ -57,15 +61,32 @@ function App() {
   
   useEffect(() => {
     dispatch(getCurrentUser())
+    
+    // Initialize AOS animation library
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false,
+      offset: 50
+    })
   }, [dispatch])
 
   return (
     <ThemeProvider>
       <Router>
-        <div className="app-container">
+        <div className="app-container" style={{
+          backgroundColor: 'var(--bg-primary)',
+          color: 'var(--text-primary)',
+          minHeight: '100vh'
+        }}>
           <ToastContainer position="top-right" autoClose={3000} />
           <Header />
-          <main className="main-content">
+          <main className="main-content" style={{
+            backgroundColor: 'var(--bg-primary)',
+            color: 'var(--text-primary)',
+            flex: '1'
+          }}>
             <Routes>
               {/* Public routes */}
               <Route path="/" element={<Home />} />

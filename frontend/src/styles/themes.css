@@ -1,148 +1,418 @@
-/* Theme Variables */
+/* UChef Theme System - Bold Orange & Cyan Palette */
 
-/* Light Mode (Default) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* 
+Light Mode - Fresh Orange & White */
 :root {
-  /* Base colors - softer whites for reduced eye strain */
-  --bg-primary: #f8f9fa; /* Off-white rather than stark white */
-  --bg-secondary: #f0f2f5;
-  --bg-tertiary: #e9ecef;
-  --bg-card: #f8f9fa;
-  --bg-dropdown: #f8f9fa;
-  --bg-input: #f8f9fa;
+  /* Core Background Colors - Clean white base with orange accents */
+  --bg-primary: #ffffff; /* Pure white main background */
+  --bg-secondary: #fffaf5; /* Very light orange tint for sections */
+  --bg-tertiary: #fff4e8; /* Light orange background for highlighted areas */
+  --bg-card: #ffffff; /* White cards */
+  --bg-dropdown: #ffffff; /* White dropdowns */
+  --bg-input: #fffbf7; /* Very subtle orange tint for inputs */
   
-  /* Text colors - slightly softer for better readability */
-  --text-primary: #343a40; /* Softer than pure black */
-  --text-secondary: #495057;
-  --text-tertiary: #6c757d;
-  --text-muted: #adb5bd;
-  --text-inverse: #f8f9fa;
+  /* Typography Colors - Dark text on light backgrounds */
+  --text-primary: #111111; /* Near black for primary text */
+  --text-secondary: #333333; /* Dark gray for secondary text */
+  --text-tertiary: #555555; /* Medium gray for less important text */
+  --text-muted: #777777; /* Light gray for disabled text */
+  --text-inverse: #ffffff; /* White text for dark backgrounds */
   
-  /* Brand colors - warmer and more muted for comfortable viewing */
-  --primary-color: #e76f51; /* Terracotta - less intense than bright orange */
-  --primary-color-hover: #f4a261; /* Soft orange on hover */
-  --primary-color-light: #f8c6b6; /* Very light terracotta */
-  --primary-color-dark: #bc4b35; /* Deeper terracotta */
+  /* Brand Colors - Vibrant Orange Palette */
+  --primary-color: #ff6b00; /* Vibrant orange - primary brand color */
+  --primary-color-hover: #ff8124; /* Slightly lighter orange for hover */
+  --primary-color-light: #ffd2b0; /* Very light orange for backgrounds */
+  --primary-color-dark: #e05e00; /* Deeper orange for focus */
   
-  --secondary-color: #2a9d8f; /* Muted teal - easier on the eyes */
-  --secondary-color-hover: #3aafa9;
-  --secondary-color-light: #a8dadc; /* Pale teal */
-  --secondary-color-dark: #1d7874; /* Deep teal */
+  --secondary-color: #ff9243; /* Lighter orange for secondary elements */
+  --secondary-color-hover: #ffa563; /* Even lighter orange for hover */
+  --secondary-color-light: #ffe1c7; /* Very light peach for highlights */
+  --secondary-color-dark: #e27b2c; /* Medium orange for contrast */
   
-  --accent-color: #f9c74f; /* Muted yellow - less harsh than bright yellow */
-  --accent-color-light: #faedcd; /* Very pale yellow */
-  --accent-color-dark: #e9b44c; /* Deeper gold */
+  --accent-color: #ff7b3b; /* Bright orange accent */
+  --accent-color-light: #ffc7a8; /* Pale orange for subtle highlights */
+  --accent-color-dark: #d65a1e; /* Deep orange for emphasis */
   
-  /* Feedback colors */
-  --success-color: #4CAF50;
-  --warning-color: #FFC107;
-  --danger-color: #f44336;
-  --info-color: #2196F3;
+  /* Feedback Colors - Intuitive Status Indicators */
+  --success-color: #22c55e; /* Clear green for success messages */
+  --warning-color: #f59e0b; /* Amber for warnings */
+  --danger-color: #ef4444; /* Red for errors and destructive actions */
+  --info-color: #3b82f6; /* Blue for informational messages */
   
-  /* UI Elements */
-  --border-color: #e0e0e0;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  /* UI Element Styles */
+  --border-color: #e2e8f0; /* Light gray borders - subtle separation */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle shadow for cards */
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Medium shadow for dropdowns */
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Larger shadow for modals */
   
-  /* Transitions */
-  --transition-fast: 0.2s;
-  --transition-normal: 0.3s;
-  --transition-slow: 0.5s;
+  /* Transitions - Smooth and Responsive */
+  --transition-fast: 0.15s; /* Quick feedback for immediate interactions */
+  --transition-normal: 0.3s; /* Standard transition for most elements */
+  --transition-slow: 0.5s; /* Slower transitions for larger UI changes */
   
-  /* Border radius */
-  --border-radius-sm: 4px;
-  --border-radius: 8px;
-  --border-radius-lg: 16px;
-  --border-radius-xl: 24px;
-  --border-radius-full: 9999px;
+  /* Border Radius - Consistent Rounding */
+  --border-radius-sm: 4px; /* Subtle rounding for small elements */
+  --border-radius: 8px; /* Standard rounding for most components */
+  --border-radius-lg: 12px; /* More prominent rounding for larger elements */
+  --border-radius-xl: 16px; /* Significant rounding for hero elements */
+  --border-radius-full: 9999px; /* Full rounding for pills and avatars */
 }
 
-/* Dark Mode */
+/* 
+Dark Mode - Bold Black & Cyan */
 [data-theme='dark'] {
-  /* Base colors - warm dark tones that reduce blue light and are easier on the eyes */
-  --bg-primary: #212529; /* Slightly warmer dark gray instead of pure black */
-  --bg-secondary: #2b3035; /* Dark charcoal with slight warmth */
-  --bg-tertiary: #343a40; /* Medium charcoal */
-  --bg-card: #2b3035;
-  --bg-dropdown: #343a40;
-  --bg-input: #343a40;
+  /* Core Background Colors - True Black Base */
+  --bg-primary: #000000; /* Pure black main background */
+  --bg-secondary: #0a0a0a; /* Very dark gray, almost black, for sections */
+  --bg-tertiary: #111111; /* Slightly lighter black for highlighted areas */
+  --bg-card: #0cced0; /* Bright cyan for cards */
+  --bg-dropdown: #0aa2a4; /* Slightly darker cyan for dropdowns */
+  --bg-input: #121212; /* Very dark gray input backgrounds */
   
-  /* Text colors - high enough contrast for readability without being harsh */
-  --text-primary: #f0f0f0; /* Not fully white to reduce harshness */
-  --text-secondary: #d0d0d0;
-  --text-tertiary: #a0a0a0;
-  --text-muted: #818181;
-  --text-inverse: #212529;
+  /* Typography Colors - High Contrast Text */
+  --text-primary: #ffffff; /* Pure white for main text on dark backgrounds */
+  --text-secondary: #e0e0e0; /* Light gray for secondary text */
+  --text-tertiary: #b0b0b0; /* Medium gray for less important text */
+  --text-muted: #707070; /* Dark gray for disabled text */
+  --text-inverse: #000000; /* Black text for cyan cards and other light backgrounds */
   
-  /* Brand colors - softer and warmer for dark mode comfort */
-  --primary-color: #ee8959;  /* Muted coral that's visible but not harsh */
-  --primary-color-hover: #f4a261;
-  --primary-color-light: #fbc4ab; /* Very soft peach */
-  --primary-color-dark: #db7a50;
+  /* Brand Colors - Orange & Cyan Contrast */
+  --primary-color: #ff6600; /* Vibrant orange primary color */
+  --primary-color-hover: #ff7a1f; /* Slightly lighter orange for hover */
+  --primary-color-light: #ff9d5c; /* Soft orange for highlights */
+  --primary-color-dark: #cc5200; /* Deeper orange for focus states */
   
-  --secondary-color: #48cae4;  /* Softer blue-teal that stands out without eye strain */
-  --secondary-color-hover: #90e0ef;
-  --secondary-color-light: #ade8f4; /* Very light teal */
-  --secondary-color-dark: #0096c7;
+  --secondary-color: #00c8cc; /* Bright cyan for secondary elements */
+  --secondary-color-hover: #04e0e5; /* Slightly brighter cyan for hover */
+  --secondary-color-light: #84e5e7; /* Light cyan for subtle highlights */
+  --secondary-color-dark: #02999c; /* Darker cyan for contrast */
   
-  --accent-color: #ffd166;  /* Softer amber color */
-  --accent-color-light: #ffe8a3; /* Very soft yellow */
-  --accent-color-dark: #e9c46a;
+  --accent-color: #ff9900; /* Amber accent color */
+  --accent-color-light: #ffc266; /* Light amber for subtle highlights */
+  --accent-color-dark: #e68b00; /* Deeper amber for emphasis */
   
-  /* Feedback colors - adjusted for dark mode */
-  --success-color: #66BB6A;
-  --warning-color: #FFCA28;
-  --danger-color: #EF5350;
-  --info-color: #42A5F5;
+  /* Feedback Colors - Adjusted for Dark Mode Visibility */
+  --success-color: #4ade80; /* Brighter green for better visibility */
+  --warning-color: #fbbf24; /* Brighter amber for better visibility */
+  --danger-color: #f87171; /* Softer red that's still clear */
+  --info-color: #60a5fa; /* Brighter blue for better readability */
   
-  /* UI Elements */
-  --border-color: #3d3d3d;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  /* UI Element Styles - Night Owl Borders and Shadows */
+  --border-color: #1d3b53; /* Night Owl's subtle blue border color */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5); /* Deeper shadows for dark mode */
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6), 0 2px 4px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.7), 0 4px 6px -2px rgba(0, 0, 0, 0.6);
 }
 
-/* Global Styles for Dark Mode Adaptations */
-[data-theme='dark'] img {
-  opacity: 0.9; /* Slightly reduce image brightness */
-  filter: brightness(0.9) contrast(0.95); /* Slightly reduce contrast for easier viewing */
-}
+/* ===== Global Theme Application ===== */
 
-/* Global styles for both themes */
+/* Core Body Styling */
 body {
-  transition: background-color var(--transition-normal), color var(--transition-normal);
+  transition: background-color 0.35s cubic-bezier(0.4,0,0.2,1), color 0.35s cubic-bezier(0.4,0,0.2,1);
   background-color: var(--bg-primary);
   color: var(--text-primary);
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* Additional eye-friendly settings */
-p, li, span, div {
-  line-height: 1.6; /* Improved line spacing for readability */
-  font-size: 16px; /* Minimum comfortable font size */
+/* Common Elements Styling */
+a {
+  color: var(--primary-color);
+  transition: color var(--transition-fast), text-decoration var(--transition-fast);
+  text-decoration: none;
 }
 
-/* Reduce eye strain from large areas of bright colors */
-.card, .panel, section, article {
-  background-color: var(--bg-card);
-  border-color: var(--border-color);
+a:hover {
+  color: var(--primary-color-hover);
+  text-decoration: underline;
+}
+
+/* Typography Enhancements */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  margin-top: 0;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+p, li, span, div, input, textarea, select, button {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Form Elements */
+input, textarea, select {
+  background-color: var(--bg-input);
+  border: 1.5px solid var(--border-color);
   border-radius: var(--border-radius);
+  color: var(--text-primary);
+  padding: 0.7rem 1rem;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  font-size: 1.05rem;
 }
 
-/* Custom scrollbars for both themes */
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-color-light);
+  outline: none;
+}
+
+input:disabled, textarea:disabled, select:disabled {
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  padding: 0.7rem 1.5rem;
+  font-size: 1.08rem;
+  border-radius: var(--border-radius-full);
+  transition: background 0.22s cubic-bezier(0.4,0,0.2,1), color 0.18s, box-shadow 0.22s, transform 0.18s;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 110%;
+  height: 110%;
+  border-radius: inherit;
+  background: rgba(255,255,255,0.09);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.btn:active::after {
+  opacity: 1;
+}
+
+
+.btn-primary {
+  background: linear-gradient(90deg, var(--primary-color) 80%, var(--accent-color) 100%);
+  color: var(--text-inverse);
+  box-shadow: 0 2px 8px rgba(255,107,0,0.07);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background: linear-gradient(90deg, var(--primary-color-hover) 70%, var(--accent-color-dark) 100%);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 16px rgba(255,107,0,0.12);
+}
+
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--text-inverse);
+}
+
+.btn-secondary:hover {
+  background-color: var(--secondary-color-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline:hover {
+  background-color: var(--primary-color-light);
+  color: var(--primary-color-dark);
+}
+
+/* Cards and UI Components */
+.card {
+  background-color: var(--bg-card);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition: transform 0.22s cubic-bezier(0.4,0,0.2,1), box-shadow 0.22s, border-color 0.18s;
+  position: relative;
+}
+
+.card:hover, .card:focus-within {
+  transform: translateY(-6px) scale(1.012);
+  box-shadow: 0 8px 36px rgba(0,0,0,0.13);
+  border-color: var(--primary-color);
+  z-index: 2;
+}
+
+.card img {
+  transition: transform 0.22s cubic-bezier(0.4,0,0.2,1), filter 0.18s;
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+.card:hover img {
+  transform: scale(1.035);
+  filter: brightness(1.04) saturate(1.1);
+}
+
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.card-text {
+  color: var(--text-secondary);
+}
+
+/* Dark mode text adjustments for cards */
+[data-theme='dark'] .card {
+  color: var(--text-inverse);
+}
+
+[data-theme='dark'] .card-title {
+  color: var(--text-inverse);
+}
+
+[data-theme='dark'] .card-text {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* Section Styling */
+section {
+  padding: 3.5rem 0 2.5rem 0;
+  position: relative;
+  background: linear-gradient(120deg, var(--bg-secondary) 70%, var(--bg-tertiary) 100%);
+  border-radius: var(--border-radius-lg);
+  margin-bottom: 2.5rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+}
+
+.section-header {
+  margin-bottom: 2.5rem;
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+
+/* Dark Mode Image Adjustments - Night Owl Mode */
+[data-theme='dark'] img {
+  opacity: 0.9;
+  filter: brightness(0.9) contrast(1.05) saturate(1.1);
+}
+
+/* Custom Scrollbars */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
   background: var(--bg-secondary);
+  border-radius: var(--border-radius-full);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color-light);
+  background: linear-gradient(120deg, var(--primary-color-light) 60%, var(--primary-color) 100%);
   border-radius: var(--border-radius-full);
-  border: 3px solid var(--bg-secondary);
+  border: 2px solid var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--primary-color);
+  background: var(--primary-color);
+}
+
+/* Navigation Styling */
+nav {
+  background: rgba(255, 245, 235, 0.95); /* Soft peach with slight opacity */
+  box-shadow: 0 2px 18px 0 rgba(255,107,0,0.06), 0 1.5px 0 0 var(--border-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 100;
+  border-bottom: 1.5px solid var(--border-color);
+  backdrop-filter: blur(8px) saturate(1.2);
+  transition: background 0.28s, box-shadow 0.22s;
+}
+
+[data-theme='dark'] nav {
+  background: rgba(10, 10, 10, 0.92); /* Deep black glass for dark mode */
+  border-bottom: 1.5px solid var(--border-color);
+  box-shadow: 0 2px 18px 0 rgba(12,206,208,0.07), 0 1.5px 0 0 var(--border-color);
+  backdrop-filter: blur(6px) saturate(1.1);
+}
+
+
+.nav-link {
+  color: var(--text-primary);
+  font-weight: 600;
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--border-radius-full);
+  transition: color 0.18s, background 0.18s, box-shadow 0.22s;
+  position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--accent-color);
+  background: rgba(255,123,59,0.09);
+  box-shadow: 0 2px 8px rgba(255,123,59,0.08);
+}
+
+[data-theme='dark'] .nav-link:hover, [data-theme='dark'] .nav-link.active {
+  color: var(--accent-color);
+  background: rgba(12,206,208,0.13);
+  box-shadow: 0 2px 8px rgba(12,206,208,0.08);
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.theme-toggle-btn:hover {
+  transform: rotate(15deg) scale(1.1);
+  color: var(--primary-color);
 }

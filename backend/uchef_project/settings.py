@@ -11,9 +11,30 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent 
+
+
+
+
+
+PASSWORD_RESET_TIMEOUT=1*60*60          #1 hour
+
+
+from decouple import config
+
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = int(config('EMAIL_PORT'))  
+EMAIL_USE_TLS = config('EMAIL_USE_TLS') == 'True'  
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+ACTIVATION_URL = config('ACTIVATION_URL')
 
 
 # Quick-start development settings - unsuitable for production
@@ -67,7 +88,7 @@ ROOT_URLCONF = 'uchef_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'users' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -156,3 +177,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
 }
+
+# Token settings
+

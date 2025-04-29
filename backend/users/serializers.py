@@ -35,7 +35,7 @@ class UserSerializer(serializers.ModelSerializer):
         validated_data['is_active'] = False
         user = User.objects.create_user(**validated_data)
         UserProfile.objects.create(user=user)
-        send_activation_email(user)
+        # send_activation_email(user)
 
 
         return user

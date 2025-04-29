@@ -54,9 +54,7 @@ class UserRegistrationView(generics.CreateAPIView):
     
     def perform_create(self, serializer):
         user = serializer.save(is_active=False)
-        # UserProfile is already created in the serializer's create method
-        # so we don't need to create it again here
-        send_activation_email(user)
+      
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

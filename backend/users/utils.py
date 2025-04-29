@@ -14,10 +14,17 @@ def send_activation_email(user):
     This eliminates redundant code across the application.
     """
     try:
-        activation_url = config('ACTIVATION_URL')
+        # Get the base URL from environment variable
+        base_url = config('ACTIVATION_URL', default='http://localhost:8000')
+        # Remove any trailing 'activate' from the base URL if present
+        if base_url.endswith('/activate'):
+            base_url = base_url.rsplit('/activate', 1)[0]
+        
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = default_token_generator.make_token(user)
-        activation_link = f"{activation_url}/{uid}/{token}/"
+        
+        # Form the correct activation link with the api/users/activate path
+        activation_link = f"{base_url}/api/users/activate/{uid}/{token}/"
         
         subject = "Activate your Uchef account"
         message = f"Hi {user.username},\n\nPlease click the link below to activate your account:\n\n{activation_link}\n\nThank you!"

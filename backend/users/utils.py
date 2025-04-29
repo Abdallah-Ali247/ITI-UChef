@@ -38,3 +38,31 @@ def send_activation_email(user):
     except Exception as e:
         logger.error(f"Failed to send activation email to {user.email}: {str(e)}")
         return False
+
+
+def send_password_reset_email(user):
+    """
+    Send a password reset email to the user with a secure token link.
+    """
+    try:
+        # Get the base URL from environment variable
+        frontend_url = config('FRONTEND_URL', default='http://localhost:5173')
+        
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
+        token = default_token_generator.make_token(user)
+        
+        # Form the password reset link
+        reset_url = f"{frontend_url}/reset-password/{uid}/{token}"
+        
+        subject = "Reset your UChef password"
+        message = f"Hi {user.username},\n\nWe received a request to reset your password. If you didn't make this request, you can safely ignore this email.\n\nTo reset your password, click the link below:\n\n{reset_url}\n\nThis link will expire in 24 hours.\n\nThank you!"
+        from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_list = [user.email]
+        
+        logger.info(f"Sending password reset email to {user.email} with link {reset_url}")
+        send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+        logger.info(f"Password reset email sent successfully to {user.email}")
+        return True
+    except Exception as e:
+        logger.error(f"Failed to send password reset email to {user.email}: {str(e)}")
+        return False

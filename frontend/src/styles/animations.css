@@ -1,0 +1,332 @@
+/* Animations for UChef Application */
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Scale Up Animation */
+@keyframes scaleUp {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Slide In From Right */
+@keyframes slideInRight {
+  from { transform: translateX(30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Slide In From Left */
+@keyframes slideInLeft {
+  from { transform: translateX(-30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Slide In From Bottom */
+@keyframes slideInBottom {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Wiggle Animation */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Shimmer Effect */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+/* Shuffle Animations */
+@keyframes shuffle {
+  0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+  20% { transform: translateX(-100px) rotate(-8deg); opacity: 0.8; }
+  40% { transform: translateX(100px) rotate(8deg); opacity: 0.6; }
+  60% { transform: translateX(-50px) rotate(-5deg); opacity: 0.8; }
+  80% { transform: translateX(50px) rotate(5deg); opacity: 0.9; }
+  100% { transform: translateX(0) rotate(0deg); opacity: 1; }
+}
+
+@keyframes shuffle-in {
+  0% { transform: translateY(50px) rotate(-10deg) scale(0.5); opacity: 0; }
+  100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+}
+
+@keyframes spotlight {
+  0% { box-shadow: 0 0 15px 2px rgba(255, 165, 0, 0.5); }
+  50% { box-shadow: 0 0 30px 5px rgba(255, 165, 0, 0.8); }
+  100% { box-shadow: 0 0 15px 2px rgba(255, 165, 0, 0.5); }
+}
+
+@keyframes confetti {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+/* Spinner Animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Falling Stars Animation */
+@keyframes fallingStar {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px) translateX(0) rotate(0deg) scale(0.6);
+  }
+  10% {
+    opacity: 1;
+  }
+  20% {
+    transform: translateY(calc(100vh * 0.2)) translateX(100px) rotate(45deg) scale(0.9);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(calc(100vh * 0.5)) translateX(200px) rotate(90deg) scale(0.8);
+    opacity: 0.8;
+  }
+  80% {
+    transform: translateY(calc(100vh * 0.8)) translateX(300px) rotate(135deg) scale(0.6);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(calc(100vh * 1)) translateX(400px) rotate(180deg) scale(0.1);
+    opacity: 0;
+  }
+}
+
+@keyframes fallingStarLeft {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px) translateX(0) rotate(0deg) scale(0.6);
+  }
+  10% {
+    opacity: 1;
+  }
+  20% {
+    transform: translateY(calc(100vh * 0.2)) translateX(-100px) rotate(-45deg) scale(0.9);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(calc(100vh * 0.5)) translateX(-200px) rotate(-90deg) scale(0.8);
+    opacity: 0.8;
+  }
+  80% {
+    transform: translateY(calc(100vh * 0.8)) translateX(-300px) rotate(-135deg) scale(0.6);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(calc(100vh * 1)) translateX(-400px) rotate(-180deg) scale(0.1);
+    opacity: 0;
+  }
+}
+
+.star {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 0 4px 1px rgba(255, 255, 255, 0.7),
+    0 0 8px 2px rgba(255, 200, 100, 0.5);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.star::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+}
+
+.star-right {
+  top: 0;
+  right: 10%;
+  animation: fallingStar 3s ease-in-out forwards;
+}
+
+.star-left {
+  top: 0;
+  left: 10%;
+  animation: fallingStarLeft 3s ease-in-out forwards;
+}
+
+/* Different sizes for variety */
+.star.small {
+  width: 1px;
+  height: 1px;
+}
+
+.star.medium {
+  width: 2px;
+  height: 2px;
+}
+
+.star.large {
+  width: 3px;
+  height: 3px;
+}
+
+/* Different speeds for variety */
+.star.speed-1 { animation-duration: 2s; }
+.star.speed-2 { animation-duration: 3s; }
+.star.speed-3 { animation-duration: 4s; }
+.star.speed-4 { animation-duration: 5s; }
+
+/* Different trails for variety */
+.star.trail-1::after { width: 10px; }
+.star.trail-2::after { width: 15px; }
+.star.trail-3::after { width: 20px; }
+
+/* Different colors for variety */
+.star.golden {
+  background-color: rgba(255, 215, 0, 0.9);
+  box-shadow: 
+    0 0 6px 2px rgba(255, 215, 0, 0.8),
+    0 0 12px 4px rgba(255, 180, 0, 0.6),
+    0 0 20px 6px rgba(255, 140, 0, 0.4);
+}
+
+.star.blue {
+  background-color: rgba(135, 206, 235, 0.8);
+  box-shadow: 
+    0 0 4px 1px rgba(135, 206, 235, 0.7),
+    0 0 8px 2px rgba(100, 149, 237, 0.5);
+}
+
+/* Animation Classes */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.5s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s ease-out;
+}
+
+.animate-slide-in-bottom {
+  animation: slideInBottom 0.5s ease-out;
+}
+
+.animate-wiggle {
+  animation: wiggle 1s ease-in-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.animate-shuffle {
+  animation: shuffle 0.8s ease-in-out;
+}
+
+.animate-shuffle-in {
+  animation: shuffle-in 0.6s ease-out;
+}
+
+.animate-spotlight {
+  animation: spotlight 2s infinite ease-in-out;
+}
+
+.animate-confetti {
+  background-image: linear-gradient(45deg, var(--accent-color-primary) 25%, transparent 25%, transparent 50%, var(--accent-color-secondary) 50%, var(--accent-color-secondary) 75%, transparent 75%, var(--primary-color));
+  background-size: 60px 60px;
+  animation: confetti 2s linear infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Staggered Animation Delays */
+.stagger-delay-1 { animation-delay: 0.1s; }
+.stagger-delay-2 { animation-delay: 0.2s; }
+.stagger-delay-3 { animation-delay: 0.3s; }
+.stagger-delay-4 { animation-delay: 0.4s; }
+.stagger-delay-5 { animation-delay: 0.5s; }
+
+/* Card Hover Animation */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Hover Animation */
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Theme Toggle Animation */
+.theme-toggle {
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: rotate(15deg) scale(1.1);
+}
+
+/* Shimmer loading effect */
+.loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+/* Page transition animations */
+.page-transition-enter {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 300ms, transform 300ms;
+}

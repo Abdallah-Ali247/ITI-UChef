@@ -181,6 +181,7 @@ img {
   display: block;
   margin-bottom: var(--spacing-sm);
   font-weight: 500;
+  
 }
 
 .form-control {
@@ -514,3 +515,8 @@ img {
     padding: var(--spacing-sm);
   }
 }
+
+.invalid-feedback{
+  color: red !important;
+}
+

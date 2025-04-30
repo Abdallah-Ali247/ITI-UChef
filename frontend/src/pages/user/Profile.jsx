@@ -26,7 +26,10 @@ const Profile = () => {
     phone_number: '',
     address: '',
     bio: '',
-    favorite_cuisine: ''
+    favorite_cuisine: '',
+    password: '',
+    password2: '',
+    current_password: ''
   });
   const [profileUpdateLoading, setProfileUpdateLoading] = useState(false);
   const [profileUpdateError, setProfileUpdateError] = useState(null);
@@ -196,6 +199,38 @@ const Profile = () => {
       case 'bio':
         error = validateField('Bio', value, { maxLength: 500 });
         break;
+      case 'password':
+        // Only validate if there's a value
+        if (value) {
+          error = validateField('Password', value, { minLength: 8 });
+          
+          // If password2 has a value, check if they match
+          if (profileForm.password2 && value !== profileForm.password2) {
+            setFormErrors(prev => ({
+              ...prev,
+              password2: "Passwords do not match"
+            }));
+          } else if (profileForm.password2) {
+            // Clear the error if they now match
+            setFormErrors(prev => ({
+              ...prev,
+              password2: null
+            }));
+          }
+        }
+        break;
+      case 'password2':
+        // Only validate if there's a value
+        if (value) {
+          // Check if passwords match
+          if (profileForm.password && value !== profileForm.password) {
+            error = "Passwords do not match";
+          }
+        }
+        break;
+      case 'current_password':
+        // No client-side validation needed for current password
+        break;
       default:
         // No validation for other fields
         break;
@@ -220,8 +255,24 @@ const Profile = () => {
       bio: { maxLength: 500 }
     };
     
+    // Only add password validation rules if the user is trying to change their password
+    const isChangingPassword = profileForm.password || profileForm.password2 || profileForm.current_password;
+    
+    if (isChangingPassword) {
+      // If any password field has a value, all password fields are required
+      profileValidationRules.password = { required: true, minLength: 8 };
+      profileValidationRules.password2 = { required: true };
+      profileValidationRules.current_password = { required: true };
+    }
+    
     // Validate all fields
     const errors = validateForm(profileForm, profileValidationRules);
+    
+    // Custom validation for password matching
+    if (profileForm.password && profileForm.password2 && profileForm.password !== profileForm.password2) {
+      errors.password2 = "Passwords do not match";
+    }
+    
     setFormErrors(errors);
     
     // Only proceed if there are no validation errors
@@ -238,93 +289,37 @@ const Profile = () => {
     setProfileUpdateError(null);
     
     try {
-      // Create a completely new user object instead of modifying the existing one
-      const updatedUser = {
-        // Preserve the original user ID and other essential fields
-        id: user.id,
-        username: user.username,
-        user_type: user.user_type,
-        
-        // Add the updated fields from the form
+      // Use the custom update-profile endpoint we created in the backend
+      const response = await axios.post(`${API_URL}/users/update-profile/`, {
+        // User data
         first_name: profileForm.first_name,
         last_name: profileForm.last_name,
         email: profileForm.email,
         phone_number: profileForm.phone_number,
         address: profileForm.address,
         
-        // Create a new profile object
-        profile: {
-          id: user.profile?.id, // Preserve the profile ID if it exists
-          bio: profileForm.bio,
-          favorite_cuisine: profileForm.favorite_cuisine
-        }
-      };
-      
-      // If the user has a profile picture, include it
-      if (user.profile_picture) {
-        updatedUser.profile_picture = user.profile_picture;
-      }
-      
-      // No longer storing user data in localStorage to avoid profile data persistence between different user accounts
-      
-      // Try to update the backend database as well
-      const token = localStorage.getItem('token');
-      if (!token) {
-        throw new Error('Authentication required');
-      }
-      
-      // Update the user data in the backend using our custom endpoint
-      let backendUpdateSuccessful = false;
-      
-      try {
-        // Use the custom update-profile endpoint we created in the backend
-        const response = await axios.post(`${API_URL}/users/update-profile/`, {
-          // User data
-          first_name: profileForm.first_name,
-          last_name: profileForm.last_name,
-          email: profileForm.email,
-          phone_number: profileForm.phone_number,
-          address: profileForm.address,
-          
-          // Profile data
-          bio: profileForm.bio,
-          favorite_cuisine: profileForm.favorite_cuisine
-        }, {
-          headers: {
-            Authorization: `Token ${token}`,
-            'Content-Type': 'application/json'
-          }
-        });
+        // Profile data
+        bio: profileForm.bio,
+        favorite_cuisine: profileForm.favorite_cuisine,
         
-        console.log('Profile updated successfully. in backend:', response.data);
-        backendUpdateSuccessful = true;
-        
-        // Update Redux state with the latest user data
-        // This would typically be done through a Redux action
-        // but for simplicity, we'll just reload the page
-      } catch (error) {
-        console.error('Backend profile update failed:', error.response?.data || error.message);
-      }
-      
-      // Close the modal and show success message
-      setShowEditModal(false);
-      
-      if (backendUpdateSuccessful) {
-        alert('Profile updated successfully.');
-      } else {
-        alert('Profile updated successfully.');
-      }
-      
-      // Refresh the user data from the backend
-      const refreshResponse = await axios.get(`${API_URL}/users/me/`, {
+        // Password change data (only include if password fields are filled)
+        ...(profileForm.password && profileForm.current_password ? {
+          current_password: profileForm.current_password,
+          password: profileForm.password,
+          password2: profileForm.password2
+        } : {})
+      }, {
         headers: {
-          Authorization: `Token ${token}`
+          Authorization: `Token ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json'
         }
       });
       
-      // Update the user data in the component state
-      // In a real application, you would dispatch a Redux action to update the global state
-      // For now, we'll just reload the page to get the latest data
+      console.log('Profile updated successfully. in backend:', response.data);
+      
+      // Update Redux state with the latest user data
+      // This would typically be done through a Redux action
+      // but for simplicity, we'll just reload the page
       window.location.reload();
     } catch (error) {
       console.error('Error updating profile:', error);
@@ -584,6 +579,57 @@ const Profile = () => {
                             className="form-control"
                             placeholder="e.g., Italian, Japanese, Mexican"
                           />
+                        </div>
+                        
+                        <div className="form-group">
+                          <label htmlFor="current_password" className="form-label">Current Password</label>
+                          <input
+                            type="password"
+                            id="current_password"
+                            name="current_password"
+                            value={profileForm.current_password}
+                            onChange={handleProfileFormChange}
+                            className={`form-control ${formErrors.current_password ? 'is-invalid' : ''}`}
+                          />
+                          {formErrors.current_password && (
+                            <div className="invalid-feedback">
+                              {formErrors.current_password}
+                            </div>
+                          )}
+                        </div>
+                        
+                        <div className="form-group">
+                          <label htmlFor="password" className="form-label">New Password</label>
+                          <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={profileForm.password}
+                            onChange={handleProfileFormChange}
+                            className={`form-control ${formErrors.password ? 'is-invalid' : ''}`}
+                          />
+                          {formErrors.password && (
+                            <div className="invalid-feedback">
+                              {formErrors.password}
+                            </div>
+                          )}
+                        </div>
+                        
+                        <div className="form-group">
+                          <label htmlFor="password2" className="form-label">Confirm New Password</label>
+                          <input
+                            type="password"
+                            id="password2"
+                            name="password2"
+                            value={profileForm.password2}
+                            onChange={handleProfileFormChange}
+                            className={`form-control ${formErrors.password2 ? 'is-invalid' : ''}`}
+                          />
+                          {formErrors.password2 && (
+                            <div className="invalid-feedback">
+                              {formErrors.password2}
+                            </div>
+                          )}
                         </div>
                         
                         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1.5rem' }}>

@@ -302,3 +302,34 @@ class PaymentViewSet(viewsets.ModelViewSet):
         
         # Regular users can only see their own payments
         return Payment.objects.filter(order__user=user)
+
+
+
+
+
+
+
+from django.views.decorators.csrf import csrf_exempt
+import json
+import stripe
+from django.conf import settings
+from django.http import JsonResponse
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+@csrf_exempt  # Disable CSRF protection for this view
+def create_payment_intent(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            amount = data.get('amount')  # Amount should be in cents (e.g., $10 = 1000)
+
+            # Create a PaymentIntent with the provided amount
+            intent = stripe.PaymentIntent.create(
+                amount=amount,
+                currency='usd',  # Change to your preferred currency
+            )
+
+            return JsonResponse({'clientSecret': intent.client_secret})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)

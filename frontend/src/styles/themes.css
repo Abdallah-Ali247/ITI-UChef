@@ -1,0 +1,208 @@
+/* Theme Variables */
+:root {
+  /* Light Theme (Default) - Food Service Theme */
+  --primary-color: #E83F22; /* Deeper tomato red */
+  --secondary-color: #2D8C7F; /* Richer teal */
+  --accent-color: #EDAA00; /* Warm amber */
+  --accent-color-secondary: #4A9630; /* Deeper herb green */
+  --accent-color-tertiary: #E8701A; /* Rich orange */
+  
+  /* Text colors */
+  --text-color: #2C2C2C; /* Near black */
+  --text-color-secondary: #494949; /* Dark gray */
+  --review-text-color: #2C2C2C; /* Match text color */
+  --header-text: #FFFFFF; /* Clean white for contrast */
+  --dice-color: #000000; /* Black dice in light mode */
+  
+  /* Background colors */
+  --bg-color: #F7F0E2; /* Muted cream - less bright */
+  --bg-color-secondary: #F0E6D3; /* Deeper egg-shell */
+  --bg-pattern: linear-gradient(135deg, rgba(232, 63, 34, 0.15) 0%, rgba(247, 240, 226, 1) 100%); /* Tomato to cream gradient */
+  --bg-accent: #EDE3D2; /* Warm beige */
+  --bg-accent-secondary: #E6D8C4; /* Richer toast color */
+  
+  /* Card styles */
+  --card-bg: #FEFAF2; /* Softened white */
+  --card-shadow: 0 8px 20px rgba(232, 63, 34, 0.1); /* Soft tomato shadow */
+  --card-border: 1px solid #E8DBC7; /* Visible but soft border */
+  --card-hover-border: 1px solid #D9C9AD; /* More noticeable border on hover */
+  --card-radius: 10px; /* Slightly less rounded */
+  --border-color: #E8DBC7;
+  
+  /* Button styles */
+  --view-details-bg: #E8701A; /* Rich orange */
+  --view-details-color: #FFFFFF; /* White text */
+  --price-tag-bg: #EEF6E9; /* Softened green */
+  --price-tag-color: #4A9630; /* Deeper green */
+  
+  /* Header and footer */
+  --header-bg: rgba(0, 0, 0, 0.85); /* Semi-transparent black */
+  --header-text: #FFFFFF; /* White for contrast */
+  --footer-bg: #2D2D2D; /* Near black */
+  --footer-text: #F3F3F3; /* Off-white */
+  
+  /* Status colors */
+  --success-color: #4A9630; /* Deeper green */
+  --warning-color: #EDAA00; /* Amber */
+  --danger-color: #E83F22; /* Deeper tomato */
+  --info-color: #2D8C7F; /* Deeper teal */
+  
+  /* UI Elements */
+  --border-radius: 10px; /* Slightly less rounded */
+  --box-shadow: 0 8px 25px rgba(232, 63, 34, 0.15); /* More noticeable shadow */
+  --hover-transition: all 0.3s ease;
+  
+  /* Food theme accent colors */
+  --color-1: #E8701A; /* Rich orange */
+  --color-2: #E83F22; /* Deeper tomato red */
+  --color-3: #4A9630; /* Deeper herb green */
+  --color-4: #EDAA00; /* Amber */
+  --color-5: #7A3B00; /* Deep coffee brown */
+  
+  /* More food-inspired colors */
+  --avocado: #4A721C;
+  --berry: #9C0050;
+  --honey: #D9A11D;
+  --spice: #B24600;
+  --cream: #F7F0E2;
+  
+  /* Color RGB values for opacity */
+  --primary-color-rgb: 232, 63, 34;
+  --secondary-color-rgb: 45, 140, 127;
+  --accent-color-rgb: 237, 170, 0;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --primary-color: #ff6b6b;
+  --secondary-color: #4ecdc4;
+  --accent-color: #f9bc60;
+  --accent-color-secondary: #81b29a;
+  --accent-color-tertiary: #3d5a80;
+  --text-color: #f0f0f0;
+  --text-color-secondary: #cccccc;
+  --review-text-color: #000000; /* Black review text in dark mode */
+  --dice-color: #f9bc60; /* Golden dice in dark mode */
+  --bg-color: #121212;
+  --bg-color-secondary: #1e1e1e;
+  --bg-pattern: linear-gradient(135deg, #1e1e1e 0%, #121212 100%);
+  --bg-accent: #2c2c2c;
+  --bg-accent-secondary: #252525;
+  --card-bg: #1e1e1e;
+  --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  --card-border: 1px solid #2c2c2c;
+  --card-hover-border: 1px solid #3c3c3c;
+  --card-radius: 12px;
+  --border-color: #333333;
+  /* Button styles */
+  --view-details-bg: #ff6b6b; /* Match primary */
+  --view-details-color: #ffffff;
+  --price-tag-bg: #2c2c2c; /* Darker background */
+  --price-tag-color: #f9bc60; /* Match accent */
+  --header-bg: #1a1a1a;
+  --header-text: #f0f0f0;
+  --footer-bg: #0f0f0f;
+  --footer-text: #f0f0f0;
+  --info-color: #3498db;
+  --primary-color-rgb: 255, 107, 107;
+  --secondary-color-rgb: 78, 205, 196;
+  --accent-color-rgb: 249, 188, 96;
+}
+
+/* Apply base styles */
+body {
+  background-color: var(--bg-color);
+  background-image: var(--bg-pattern);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Animation for theme transition */
+.theme-transition * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Theme toggle button styles */
+.theme-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.theme-btn:hover {
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+}
+
+.theme-icon {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+/* Cart badge */
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 0.7rem;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Enhanced navigation */
+.nav-icon {
+  margin-right: 5px;
+}
+
+.cart-item {
+  position: relative;
+}
+
+.cart-link {
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  font-weight: 500;
+  padding: 0;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.logout-btn:hover {
+  color: var(--primary-color);
+}
+
+/* Logo styles */
+.logo-text {
+  font-weight: bold;
+  background: linear-gradient(45deg, var(--primary-color), var(--burnt-orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.invalid-feedback, .alert{
+  color: red !important;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.3);
+}
+
+

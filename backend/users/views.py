@@ -65,6 +65,25 @@ def update_profile(request):
     if 'address' in request.data:
         user.address = request.data['address']
     
+    # Handle password change if provided
+    if 'password' in request.data and 'current_password' in request.data and 'password2' in request.data:
+        # Verify current password
+        if not user.check_password(request.data['current_password']):
+            return Response(
+                {"error": "Current password is incorrect"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Verify new passwords match
+        if request.data['password'] != request.data['password2']:
+            return Response(
+                {"error": "New passwords do not match"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Set new password
+        user.set_password(request.data['password'])
+    
     # Save user changes
     user.save()
     

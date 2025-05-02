@@ -26,6 +26,13 @@ const AllMeals = () => {
     dispatch(fetchMealCategories());
   }, [dispatch]);
 
+  // Log meal data structure when it changes
+  useEffect(() => {
+    if (meals && meals.length > 0) {
+      console.log('Meal data structure:', meals[0]);
+    }
+  }, [meals]);
+
   // Fetch ingredient availability for all meals
   useEffect(() => {
     const checkAllAvailability = async () => {
@@ -186,7 +193,7 @@ const AllMeals = () => {
                     </div>
                     <div className="card-footer">
                       <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-color-tertiary)' }}>
-                        <FaUtensils /> {meal.ingredients?.length || 0} ingredients
+                        <FaUtensils /> {meal.meal_ingredients?.length || 0} ingredients
                       </span>
                       <Link to={`/meals/${meal.id}`} className="btn btn-primary">View Details</Link>
                     </div>

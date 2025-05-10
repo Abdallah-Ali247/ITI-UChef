@@ -33,6 +33,7 @@ urlpatterns = [
     path('api/meals/', include('meals.urls')),
     path('api/orders/', include('orders.urls')),
     path('api/reviews/', include('reviews.urls')),
+    path('api/notifications/', include('notifications.urls')),  # Add notifications URL patterns
 ]
 
 # Serve media files in development

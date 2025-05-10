@@ -1,0 +1,8 @@
+[build]
+  command = "echo 'Backend deployment will be handled by Render'"
+  publish = "."
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

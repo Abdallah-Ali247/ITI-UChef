@@ -42,6 +42,11 @@ const RestaurantDashboard = () => {
   const [mealSearchTerm, setMealSearchTerm] = useState('');
   const [ingredientSearchTerm, setIngredientSearchTerm] = useState('');
   
+  // Cancellation reason state
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [cancelOrderId, setCancelOrderId] = useState(null);
+  const [cancelReason, setCancelReason] = useState('');
+  
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/login');
@@ -145,6 +150,14 @@ const RestaurantDashboard = () => {
   };
   
   const handleStatusChange = (orderId, newStatus) => {
+    // If status is cancelled, show modal to get reason
+    if (newStatus === 'cancelled') {
+      setCancelOrderId(orderId);
+      setShowCancelModal(true);
+      return;
+    }
+    
+    // Otherwise proceed with normal status update
     dispatch(updateOrderStatus({
       orderId,
       status: newStatus
@@ -247,6 +260,29 @@ const RestaurantDashboard = () => {
         'Failed to delete ingredient. Please try again.'
       );
     }
+  };
+  
+  // Handle cancellation with reason
+  const handleCancelSubmit = () => {
+    if (!cancelReason.trim()) {
+      alert('Please provide a reason for cancellation');
+      return;
+    }
+    
+    dispatch(updateOrderStatus({
+      orderId: cancelOrderId,
+      status: 'cancelled',
+      reason: cancelReason
+    }))
+      .then(resultAction => {
+        if (updateOrderStatus.fulfilled.match(resultAction)) {
+          alert(`Order #${cancelOrderId} has been cancelled`);
+          // Reset modal state
+          setShowCancelModal(false);
+          setCancelOrderId(null);
+          setCancelReason('');
+        }
+      });
   };
   
   if (restaurantLoading) {
@@ -925,6 +961,66 @@ const RestaurantDashboard = () => {
                 </table>
               </div>
             )}
+          </div>
+        )}
+        
+        {/* Cancellation Reason Modal */}
+        {showCancelModal && (
+          <div className="modal-overlay" style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000
+          }}>
+            <div className="modal-content" style={{
+              backgroundColor: 'white',
+              padding: '2rem',
+              borderRadius: 'var(--border-radius)',
+              width: '90%',
+              maxWidth: '500px',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+            }}>
+              <h3>Provide Cancellation Reason</h3>
+              <p>Please provide a reason for cancelling order #{cancelOrderId}. This will be sent to the customer.</p>
+              
+              <div className="form-group" style={{ marginTop: '1rem' }}>
+                <label htmlFor="cancelReason" className="form-label">Cancellation Reason</label>
+                <textarea 
+                  id="cancelReason"
+                  className="form-control"
+                  value={cancelReason}
+                  onChange={(e) => setCancelReason(e.target.value)}
+                  rows="3"
+                  placeholder="Example: Out of stock items, outside delivery area, etc."
+                  required
+                />
+              </div>
+              
+              <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
+                <button 
+                  className="btn btn-outline"
+                  onClick={() => {
+                    setShowCancelModal(false);
+                    setCancelOrderId(null);
+                    setCancelReason('');
+                  }}
+                >
+                  Cancel
+                </button>
+                <button 
+                  className="btn btn-danger"
+                  onClick={handleCancelSubmit}
+                >
+                  Confirm Cancellation
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>

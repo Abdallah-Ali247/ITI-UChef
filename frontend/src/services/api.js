@@ -1,3 +1,5 @@
+import { loadStripe } from '@stripe/stripe-js';
+
 import axios from 'axios';
 
 const API_URL = 'http://localhost:8000/api';
@@ -41,3 +43,8 @@ api.interceptors.response.use(
 );
 
 export default api;
+
+
+export const STRIPE_PUBLISHABLE_KEY = 'pk_test_51REvlOQq3cy6jD6O67s3xrZDQhGlIMy5zP1iaaHDmMkbSHxS2ryXgOJXzFLzy2oVKKL1N8A5TCSGjXoLaaMyzAVj00o00qrSv4';
+// Load Stripe.js
+export const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);

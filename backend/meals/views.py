@@ -1,12 +1,15 @@
 from rest_framework import viewsets, permissions, status, filters
 from rest_framework.response import Response
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
 from .models import MealCategory, Meal, MealIngredient, CustomMeal, CustomMealIngredient
 from .serializers import MealCategorySerializer, MealSerializer, MealIngredientSerializer, CustomMealSerializer, CustomMealIngredientSerializer
 from restaurants.models import Restaurant, Ingredient
 from restaurants.views import IsOwnerOrReadOnly, IsRestaurantOwnerOrReadOnly
+import requests
+from decouple import config
 
 class MealCategoryViewSet(viewsets.ModelViewSet):
     queryset = MealCategory.objects.all()
@@ -58,6 +61,7 @@ class MealViewSet(viewsets.ModelViewSet):
             'is_available': len(unavailable_ingredients) == 0,
             'unavailable_ingredients': unavailable_ingredients
         })
+    
     
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
@@ -187,6 +191,7 @@ class CustomMealViewSet(viewsets.ModelViewSet):
         custom_meal = self.get_object()
         custom_meal_ingredients = CustomMealIngredient.objects.filter(custom_meal=custom_meal)
         
+
         # Get quantity from query params, default to 1
         quantity = int(request.query_params.get('quantity', 1))
         
@@ -244,3 +249,36 @@ class CustomMealViewSet(viewsets.ModelViewSet):
             
             # Return an empty list instead of an error
             return Response([])
+
+
+# Weather Feature 
+
+@api_view(['GET'])
+def get_weather(request):
+    try:
+        city = request.GET.get('city', 'Cairo')  # Default to Cairo if no city provided
+        api_key = config('OPENWEATHERMAP_API_KEY', default='your_default_api_key')
+        url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+        
+        response = requests.get(url)
+        data = response.json()
+        
+        if response.status_code == 200:
+            return JsonResponse({
+                "success": True,
+                "city": city,
+                "temperature": data["main"]["temp"],
+                "description": data["weather"][0]["description"],
+                "humidity": data["main"]["humidity"],
+                "icon": data["weather"][0]["icon"]
+            })
+        else:
+            return JsonResponse({
+                "success": False,
+                "error": f"Error fetching weather data: {data.get('message', 'Unknown error')}"
+            }, status=response.status_code)
+    except Exception as e:
+        return JsonResponse({
+            "success": False,
+            "error": f"Error: {str(e)}"
+        }, status=500)

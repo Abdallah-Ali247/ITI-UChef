@@ -182,23 +182,51 @@ const RestaurantDetail = () => {
             Mix and match ingredients to create your perfect dish!
           </p>
           
-          <h3>Available Ingredients</h3>
+          <h3 style={{margin: '3rem'}}>Available Ingredients</h3>
           {ingredients.length === 0 ? (
             <div className="no-results" style={{ textAlign: 'center', padding: '2rem' }}>
               <p>No ingredients available for custom meals.</p>
             </div>
           ) : (
-            <div className="ingredient-list">
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1rem' }}>
               {ingredients.map(ingredient => (
-                <div key={ingredient.id} className="ingredient-item">
-                  <h4>{ingredient.name}</h4>
-                  <p>{ingredient.description}</p>
-                  <p><strong>Price:</strong> ${ingredient.price_per_unit} per {ingredient.unit}</p>
-                  {ingredient.is_available ? (
-                    <span style={{ color: 'var(--success-color)' }}>In Stock</span>
-                  ) : (
-                    <span style={{ color: 'var(--danger-color)' }}>Out of Stock</span>
-                  )}
+                <div key={ingredient.id} className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                  <div className="card-body" style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+                      <h4 style={{ margin: 0, fontSize: 'clamp(1rem, 2vw, 1.25rem)' }}>{ingredient.name}</h4>
+                      <div style={{ 
+                        padding: '0.25rem 0.5rem', 
+                        borderRadius: '20px', 
+                        fontSize: '0.75rem', 
+                        fontWeight: 'bold',
+                        backgroundColor: ingredient.is_available ? 'rgba(40, 167, 69, 0.1)' : 'rgba(220, 53, 69, 0.1)',
+                        color: ingredient.is_available ? 'var(--success-color)' : 'var(--danger-color)'
+                      }}>
+                        {ingredient.is_available ? 'In Stock' : 'Out of Stock'}
+                      </div>
+                    </div>
+                    
+                    <div style={{ flex: 1, marginBottom: '1rem' }}>
+                      <p style={{ fontSize: '0.9rem', color: 'var(--text-color-secondary)', marginBottom: '0.5rem' }}>
+                        {ingredient.description || 'No description available'}
+                      </p>
+                    </div>
+                    
+                    <div style={{ 
+                      marginTop: 'auto', 
+                      padding: '0.5rem 0.75rem', 
+                      backgroundColor: 'var(--bg-color-secondary)', 
+                      borderRadius: 'var(--border-radius-sm)',
+                      fontWeight: 'bold',
+                      fontSize: '0.9rem',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center'
+                    }}>
+                      <span>Price:</span>
+                      <span>${ingredient.price_per_unit} per {ingredient.unit}</span>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>

@@ -4,6 +4,7 @@ import restaurantReducer from './slices/restaurantSlice';
 import mealReducer from './slices/mealSlice';
 import cartReducer from './slices/cartSlice';
 import orderReducer from './slices/orderSlice';
+import notificationReducer from './slices/notificationSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     meals: mealReducer,
     cart: cartReducer,
     orders: orderReducer,
+    notifications: notificationReducer,
   },
 });
 

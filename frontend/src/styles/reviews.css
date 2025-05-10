@@ -50,22 +50,46 @@
   align-items: center;
 }
 
-.star {
+.stars .star,
+.review-rating .star,
+.rating-input .star {
+  position: static !important;
   font-size: 1.25rem;
   color: var(--border-color);
   margin-right: 2px;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  box-shadow: none;
 }
 
-.star.filled {
+.stars .star.filled,
+.review-rating .star.filled,
+.rating-input .star.filled {
   color: var(--star-color, #ffc107);
 }
 
 .review-form {
   margin-bottom: 2rem;
-  padding: 1.5rem;
-  background-color: white;
+  padding: 1.75rem;
+  background-color: var(--review-container-bg);
   border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow-light);
+  box-shadow: var(--review-shadow);
+  border: var(--review-border);
+  color: var(--review-text-color, var(--text-color));
+  position: relative;
+  overflow: hidden;
+}
+
+.review-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary-color);
+  opacity: 0.8;
 }
 
 .review-form h3 {
@@ -90,12 +114,14 @@
   border-radius: var(--border-radius);
   resize: vertical;
   min-height: 100px;
+  background-color: var(--card-bg, white);
+  color: var(--review-text-color, var(--text-color));
 }
 
 .form-group small {
   display: block;
   margin-top: 0.25rem;
-  color: var(--text-muted);
+  color: var(--text-color-secondary, var(--text-muted));
 }
 
 .rating-input {
@@ -107,6 +133,8 @@
 .star-label {
   cursor: pointer;
   margin-right: 0.5rem;
+  position: relative;
+  display: inline-block;
 }
 
 .star-input {
@@ -115,6 +143,8 @@
   cursor: pointer;
   height: 0;
   width: 0;
+  left: 0;
+  top: 0;
 }
 
 .error-message {
@@ -154,13 +184,39 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  padding: 1rem;
+  background-color: var(--review-container-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--review-shadow);
+  backdrop-filter: blur(5px);
 }
 
 .review-card {
-  padding: 1.5rem;
-  background-color: white;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow-light);
+  padding: 1.75rem;
+  background-color: var(--review-card-bg);
+  border-radius: var(--card-radius);
+  border: var(--review-border);
+  box-shadow: var(--review-shadow);
+  color: var(--review-text-color, var(--text-color));
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--button-hover-shadow);
+}
+
+.review-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--primary-color);
+  opacity: 0.8;
 }
 
 .review-header {
@@ -168,6 +224,8 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--review-highlight);
 }
 
 .reviewer-info {
@@ -177,13 +235,18 @@
 
 .review-date {
   font-size: 0.875rem;
-  color: var(--text-muted);
+  color: var(--text-color-secondary, var(--text-muted));
   margin-top: 0.25rem;
 }
 
 .review-content {
-  color: var(--text-color);
-  line-height: 1.5;
+  color: var(--review-text-color, var(--text-color));
+  line-height: 1.7;
+  padding: 0.75rem 0;
+  font-size: 1.05rem;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.01em;
 }
 
 .edit-review-form {
@@ -192,10 +255,31 @@
 
 /* Meal and Custom Meal review sections */
 .meal-reviews, .custom-meal-reviews {
-  background-color: var(--background-light);
-  border-radius: var(--border-radius);
-  padding: 1.5rem;
-  box-shadow: var(--box-shadow-light);
+  background-color: var(--review-container-bg);
+  border-radius: var(--card-radius);
+  padding: 2.5rem;
+  box-shadow: var(--review-shadow);
+  border: var(--review-border);
+  position: relative;
+  overflow: hidden;
+  margin: 2.5rem 0;
+  backdrop-filter: blur(10px);
+}
+
+.meal-reviews::before, .custom-meal-reviews::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+}
+
+/* Star rating specific styles */
+.review-rating {
+  display: flex;
+  align-items: center;
 }
 
 /* Responsive adjustments */
@@ -206,7 +290,9 @@
   }
   
   .review-rating {
-    margin-top: 0.5rem;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
   }
   
   .action-buttons {

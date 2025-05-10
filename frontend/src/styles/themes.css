@@ -1,0 +1,359 @@
+/* Theme Variables */
+:root {
+  /* Light Theme (Default) - Modern Food Service Theme - Enhanced */
+  --primary-color: #E84A37; /* Refined coral red - better accessibility and contrast */
+  --secondary-color: #1A8F84; /* Deeper teal - better contrast against light backgrounds */
+  --accent-color: #F7A456; /* Warmer amber - more elegant and less harsh */
+  --accent-color-secondary: #348C5E; /* Deeper green - better readability */
+  --accent-color-tertiary: #E86C41; /* Warmer coral orange - better harmony */
+  
+  /* Text colors - Enhanced for readability */
+  --text-color: #2D3748; /* Deep blue-gray - better readability */
+  --text-color-secondary: #4A5568; /* Medium blue-gray - better contrast */
+  --text-color-tertiary: #718096; /* Light blue-gray - better hierarchy */
+  --review-text-color: #3E4C59; /* Slightly darker for better contrast */
+  --review-card-bg: #FFFFFF; /* Clean white for review cards */
+  --review-container-bg: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+  --review-border: 1px solid rgba(0, 0, 0, 0.06); /* Subtle border */
+  --review-shadow: 0 4px 15px rgba(0, 0, 0, 0.04); /* Softer shadow */
+  --review-highlight: rgba(232, 74, 55, 0.05); /* Very subtle primary color highlight */
+  --header-text: #FFFFFF; /* Clean white for contrast */
+  --dice-color: #000000; /* Black dice in light mode */
+  
+  /* Background colors - Enhanced for visual harmony */
+  --bg-color: #F0F4F8; /* Softer blue-gray background - easier on the eyes */
+  --bg-color-secondary: #E2E8F0; /* Subtle blue-gray secondary background */
+  --form-bg: #FFFFFF; /* Pure white for form controls */
+  --form-border: rgba(74, 85, 104, 0.12); /* Subtle border for better definition */
+  --form-focus-border: var(--primary-color); /* Focus border for form controls */
+  --form-focus-shadow: 0 0 0 3px rgba(232, 74, 55, 0.15); /* Softer focus shadow */
+  --bg-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='24' viewBox='0 0 88 24'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23e84a37' fill-opacity='0.08'%3E%3Cpath d='M13 0c6.627 0 12 5.373 12 12s-5.373 12-12 12S1 18.627 1 12 6.373 0 13 0zm0 2C7.477 2 3 6.477 3 12s4.477 10 10 10 10-4.477 10-10S18.523 2 13 2zm8.5 0a8.5 8.5 0 110 17 8.5 8.5 0 010-17zm0 2a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM24 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 2a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM32 7c3.866 0 7 3.134 7 7s-3.134 7-7 7-7-3.134-7-7 3.134-7 7-7zm45 1c4.418 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8zm0 2c-3.314 0-6 2.686-6 6s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6zM32 9c-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5-2.239-5-5-5zm18 0c2.761 0 5 2.239 5 5s-2.239 5-5 5-5-2.239-5-5 2.239-5 5-5zm0 2c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zM32 11c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zM0 2c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0 18c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zM5 12c0-1.105.895-2 2-2s2 .895 2 2-.895 2-2 2-2-.895-2-2zm76-10c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0 18c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm-5-8c0-1.105.895-2 2-2s2 .895 2 2-.895 2-2 2-2-.895-2-2z'/%3E%3C/g%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v20H0V0zm10 17.5c4.142 0 7.5-3.358 7.5-7.5 0-4.142-3.358-7.5-7.5-7.5-4.142 0-7.5 3.358-7.5 7.5 0 4.142 3.358 7.5 7.5 7.5zM20 20v20h20V20H20zm10 17.5c-4.142 0-7.5-3.358-7.5-7.5 0-4.142 3.358-7.5 7.5-7.5 4.142 0 7.5 3.358 7.5 7.5 0 4.142-3.358 7.5-7.5 7.5z' fill='%23f7a456' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E"); /* Food-themed pattern with plates and circles - softer opacity */
+  --bg-accent: #EDF2F7; /* Refined light accent background */
+  --bg-accent-secondary: #E2E8F0; /* Harmonized secondary accent */
+  --bg-color-warning: #FFF8EB; /* Softer amber for warnings */
+  --text-color-warning: #B54708; /* Deeper orange for better warning contrast */
+  
+  /* Card styles - Enhanced for visual appeal */
+  --card-bg: linear-gradient(145deg, #ffffff, #f9fafb); /* Subtle gradient background */
+  --card-shadow: 0 10px 20px rgba(74, 85, 104, 0.05), 0 6px 6px rgba(74, 85, 104, 0.02); /* Refined shadow */
+  --card-border: 1px solid rgba(74, 85, 104, 0.06); /* Subtle border */
+  --card-hover-border: 1px solid rgba(232, 74, 55, 0.2); /* Enhanced hover border */
+  --card-radius: 16px; /* Rounded corners */
+  --card-accent-border: linear-gradient(to right, var(--primary-color), var(--accent-color)); /* Gradient border accent */
+  --card-header-bg: rgba(232, 74, 55, 0.03); /* Subtle header background */
+  --border-color: rgba(74, 85, 104, 0.12); /* Enhanced border for better definition */
+  --border-color-light: rgba(74, 85, 104, 0.06); /* Subtle border with blue-gray tint */
+  
+  /* Button styles - Enhanced for better interaction */
+  --view-details-bg: #E84A37; /* Using primary color for consistency */
+  --view-details-color: #FFFFFF; /* White text */
+  --price-tag-bg: #E6F4EA; /* Refined green background */
+  --price-tag-color: #2D8A54; /* Enhanced green for better readability */
+  --button-hover-transform: translateY(-2px); /* Subtle lift effect on hover */
+  --button-hover-shadow: 0 7px 14px rgba(74, 85, 104, 0.08), 0 3px 6px rgba(74, 85, 104, 0.06); /* Enhanced hover shadow */
+  
+  /* Header and footer */
+  --header-bg: #FFFFFF; /* White navbar */
+  --header-text: #333333; /* Dark text for contrast */
+  --header-text-hover: #E84A37; /* Primary color hover */
+  --footer-bg: #1A202C; /* Deep blue-black */
+  --footer-text: #F3F3F3; /* Off-white */
+  
+  /* Status colors */
+  --success-color: #38A169; /* Rich green */
+  --warning-color: #DD6B20; /* Amber orange */
+  --danger-color: #E53E3E; /* Vibrant red */
+  --info-color: #3182CE; /* Clear blue */
+  
+  /* UI Elements */
+  --border-radius: 12px; /* More rounded */
+  --border-radius-lg: 16px; /* Large border radius */
+  --border-radius-sm: 8px; /* Small border radius */
+  --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  --hover-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth transition */
+  
+  /* Font styles */
+  --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --heading-font: 'Montserrat', 'Poppins', sans-serif;
+  --heading-weight: 700;
+  --body-weight: 400;
+  --body-line-height: 1.6;
+  --heading-line-height: 1.3;
+  
+  /* Food theme accent colors */
+  --color-1: #DD6B20; /* Rich orange */
+  --color-2: #E53E3E; /* Vibrant red */
+  --color-3: #38A169; /* Rich green */
+  --color-4: #D69E2E; /* Golden amber */
+  --color-5: #7B341E; /* Deep coffee brown */
+  
+  /* More food-inspired colors */
+  --avocado: #3F6212;
+  --berry: #9B2C2C;
+  --honey: #C05621;
+  --spice: #9C4221;
+  --cream: #F7F2E7;
+  
+  /* Color RGB values for opacity */
+  --primary-color-rgb: 232, 74, 55;
+  --secondary-color-rgb: 26, 143, 132;
+  --accent-color-rgb: 247, 164, 86;
+}
+
+/* Dark Theme - Enhanced */
+[data-theme="dark"] {
+  /* Main colors - more vibrant */
+  --primary-color: #ff7b6b; /* Slightly brighter red */
+  --secondary-color: #4ecdc4;
+  --accent-color: #ffd166; /* Brighter gold */
+  --accent-color-secondary: #81b29a;
+  --accent-color-tertiary: #f4a261;
+  
+  /* Text colors - adjusted for better contrast */
+  --text-color: #f0f0f0; /* Lighter text for dark mode */
+  --text-color-secondary: #d0d0d0; /* Medium gray - brightened for better contrast */
+  --text-color-tertiary: #b0b0b0; /* Light gray - brightened for better contrast */
+  --review-text-color: #e0e0e0; /* Lighter review text */
+  --review-card-bg: #1e1e1e; /* Slightly lighter than base for review cards */
+  --review-container-bg: rgba(30, 30, 30, 0.7); /* Semi-transparent dark */
+  --review-border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border */
+  --review-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+  --review-highlight: rgba(255, 123, 107, 0.1); /* Subtle primary color highlight */
+  --header-text: #ffffff; /* Pure white for header */
+  --dice-color: #ffffff; /* White dice in dark mode */
+  
+  /* Background colors - darker */
+  --bg-color: #121212; /* Dark base background */
+  --bg-color-secondary: #1e1e1e; /* Slightly lighter background */
+  --bg-pattern: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ff7b6b' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E"), linear-gradient(135deg, rgba(18, 18, 18, 1) 0%, rgba(35, 35, 35, 1) 100%); /* Pattern with subtle gradient */
+  --bg-accent: #242424; /* Dark accent background */
+  --bg-accent-secondary: #2a2a2a; /* Slightly lighter accent */
+  --bg-color-warning: #332500; /* Dark amber for warnings */
+  --text-color-warning: #ffc107; /* Bright amber text for warnings */
+  
+  /* Card styles - darker */
+  --card-bg: #1a1a1a; /* Dark card background */
+  --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.1); /* Deeper shadow */
+  --card-border: 1px solid #333333; /* Subtle border */
+  --card-hover-border: 1px solid #444444; /* More visible on hover */
+  --card-radius: 12px;
+  --border-color: #333333;
+  --border-color-light: #2a2a2a; /* For subtle borders */
+  
+  /* Button styles - more vibrant */
+  --view-details-bg: #ff7b6b; /* Match primary */
+  --view-details-color: #ffffff;
+  --price-tag-bg: #2a2a2a; /* Darker background */
+  --price-tag-color: #ffd166; /* Match accent */
+  
+  /* Header and footer */
+  --header-bg: #1a1a1a;
+  --header-text: #ffffff;
+  --header-text-hover: #ff7b6b; /* Hover color for dark theme */
+  --footer-bg: #0f0f0f;
+  --footer-text: #ffffff;
+  
+  /* Status colors - brighter */
+  --success-color: #4ade80; /* Brighter green */
+  --warning-color: #ffd166; /* Brighter amber */
+  --danger-color: #ff7b6b; /* Brighter red */
+  --info-color: #60a5fa; /* Brighter blue */
+  
+  /* RGB values for opacity */
+  --primary-color-rgb: 255, 123, 107;
+  --secondary-color-rgb: 78, 205, 196;
+  --accent-color-rgb: 255, 209, 102;
+  
+  /* Form focus styles */
+  --input-focus-shadow: 0 0 0 3px rgba(255, 123, 107, 0.25);
+}
+
+/* Apply base styles */
+body {
+  background-color: var(--bg-color);
+  background-image: var(--bg-pattern);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Animation for theme transition */
+.theme-transition * {
+  transition: background-color 0.4s ease-out, 
+              color 0.3s ease-out, 
+              border-color 0.3s ease, 
+              box-shadow 0.4s ease, 
+              transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Page transition effect when theme changes */
+@keyframes theme-page-transition {
+  0% { opacity: 1; }
+  50% { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
+.theme-changing body {
+  animation: theme-page-transition 0.6s ease-in-out;
+}
+
+/* Card animation on theme change */
+@keyframes theme-card-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.98); }
+  100% { transform: scale(1); }
+}
+
+.theme-changing .card {
+  animation: theme-card-pop 0.5s ease-out;
+}
+
+/* Theme toggle button styles */
+.theme-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-left: 8px;
+}
+
+.theme-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(var(--primary-color-rgb), 0.2) 0%, transparent 70%);
+  transform: scale(0);
+  transition: transform 0.4s ease;
+  border-radius: 50%;
+}
+
+.theme-btn:hover::before {
+  transform: scale(1.5);
+}
+
+.theme-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(var(--primary-color-rgb), 0.25);
+}
+
+.theme-btn:active {
+  transform: translateY(0);
+}
+
+.theme-icon {
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.theme-btn:hover .theme-icon {
+  transform: rotate(30deg);
+}
+
+/* Theme toggle animation */
+@keyframes theme-toggle-spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.8);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.theme-changing .theme-icon {
+  animation: theme-toggle-spin 0.6s ease-in-out;
+}
+
+/* Cart badge */
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 0.7rem;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Enhanced navigation */
+.nav-icon {
+  margin-right: 5px;
+}
+
+.cart-item {
+  position: relative;
+}
+
+.cart-link {
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  font-weight: 500;
+  padding: 0;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.logout-btn:hover {
+  color: var(--primary-color);
+}
+
+/* Logo styles */
+.logo-text {
+  font-weight: bold;
+  background: linear-gradient(45deg, var(--primary-color), var(--burnt-orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.invalid-feedback, .alert{
+  color: var(--danger-color) !important;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.3);
+}
+
+/* Ensure dark mode text is visible on dark backgrounds */
+[data-theme="dark"] .card-text,
+[data-theme="dark"] .section-subtitle,
+[data-theme="dark"] .ingredient-name,
+[data-theme="dark"] .ingredient-amount {
+  color: var(--text-color-secondary);
+}
+
+/* Ensure light mode text is visible on light backgrounds */
+.card-text,
+.section-subtitle,
+.ingredient-name,
+.ingredient-amount {
+  color: var(--text-color-secondary);
+}
+
+

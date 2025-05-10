@@ -1,0 +1,279 @@
+/* Weather Recommendation Styles */
+.weather-recommendation-section {
+  padding: 3rem 0;
+  margin: 2rem 0;
+}
+
+.weather-card-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.weather-card {
+  display: flex;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.weather-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.hot-card {
+  border-top: 4px solid #ff7e5f;
+}
+
+.cold-card {
+  border-top: 4px solid #4a89dc;
+}
+
+/* Image side */
+.weather-image-side {
+  flex: 0 0 40%;
+  position: relative;
+}
+
+.weather-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.weather-card:hover .weather-image {
+  transform: scale(1.05);
+}
+
+.weather-temp-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.hot-card .weather-temp-badge {
+  color: #ff7e5f;
+}
+
+.cold-card .weather-temp-badge {
+  color: #4a89dc;
+}
+
+/* Content side */
+.weather-content-side {
+  flex: 0 0 60%;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-icon-wrapper {
+  margin-bottom: 1rem;
+}
+
+.weather-icon {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.hot-card .weather-icon {
+  color: #ff7e5f;
+}
+
+.cold-card .weather-icon {
+  color: #4a89dc;
+}
+
+.weather-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  color: #333;
+  line-height: 1.2;
+}
+
+.weather-location {
+  margin-bottom: 1.5rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.weather-location p {
+  margin: 0;
+}
+
+.weather-message {
+  margin-bottom: 2rem;
+}
+
+.weather-message p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #555;
+  margin: 0;
+}
+
+.weather-cta {
+  margin-top: auto;
+}
+
+.btn-recommendation {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-cool {
+  background-color: #ff7e5f;
+  color: white;
+}
+
+.btn-warm {
+  background-color: #4a89dc;
+  color: white;
+}
+
+.btn-recommendation:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-cool:hover {
+  background-color: #ff6347;
+}
+
+.btn-warm:hover {
+  background-color: #3a70c0;
+}
+
+/* Animations */
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.6s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.7s ease-out;
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .weather-card {
+    flex-direction: column;
+  }
+  
+  .weather-image-side {
+    height: 250px;
+  }
+  
+  .weather-content-side {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .weather-recommendation-section {
+    padding: 2rem 0;
+  }
+  
+  .weather-image-side {
+    height: 200px;
+  }
+  
+  .weather-temp-badge {
+    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
+    top: 15px;
+    right: 15px;
+  }
+  
+  .weather-content-side {
+    padding: 1.5rem;
+  }
+  
+  .weather-icon {
+    font-size: 2rem;
+  }
+  
+  .weather-title {
+    font-size: 2rem;
+  }
+  
+  .weather-message p {
+    font-size: 1rem;
+  }
+  
+  .btn-recommendation {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .recommendation-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .weather-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .weather-icon {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+}

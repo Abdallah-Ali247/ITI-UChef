@@ -131,16 +131,22 @@ export const createOrder = createAsyncThunk(
 
 export const updateOrderStatus = createAsyncThunk(
   'orders/updateOrderStatus',
-  async ({ orderId, status }, { rejectWithValue }) => {
+  async ({ orderId, status, reason }, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
         return rejectWithValue('Authentication required');
       }
       
+      // Create request payload with or without reason based on status
+      const payload = { status };
+      if (status === 'cancelled' && reason) {
+        payload.reason = reason;
+      }
+      
       const response = await axios.post(
         `${API_URL}/orders/orders/${orderId}/update_status/`,
-        { status },
+        payload,
         {
           headers: {
             Authorization: `Token ${token}`,

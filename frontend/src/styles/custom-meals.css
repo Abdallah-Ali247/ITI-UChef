@@ -1,0 +1,365 @@
+/* Custom Meals Styling for UChef */
+
+.custom-meals-section {
+  padding: 5rem 2rem;
+  background-color: var(--bg-color);
+  border-radius: 16px;
+  margin: 3rem auto;
+  max-width: 1200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.custom-meals-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color));
+  z-index: 1;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  position: relative;
+}
+
+.section-title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-color-secondary);
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.7;
+}
+
+.custom-meals-carousel {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem 0;
+  position: relative;
+}
+
+/* Custom carousel arrows */
+.custom-meals-carousel .carousel-control-prev,
+.custom-meals-carousel .carousel-control-next {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  opacity: 0.8;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 -50px;
+}
+
+.custom-meals-carousel .carousel-control-prev:hover,
+.custom-meals-carousel .carousel-control-next:hover {
+  opacity: 1;
+  background-color: var(--primary-color);
+}
+
+.custom-meals-carousel .carousel-control-prev-icon,
+.custom-meals-carousel .carousel-control-next-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.custom-meals-carousel .carousel-indicators {
+  bottom: -40px;
+}
+
+.custom-meals-carousel .carousel-indicators [data-bs-target] {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  opacity: 0.5;
+  margin: 0 5px;
+}
+
+.custom-meals-carousel .carousel-indicators .active {
+  opacity: 1;
+}
+
+.custom-meal-card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: var(--hover-transition);
+  height: 100%;
+  border: var(--card-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-meal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--button-hover-shadow);
+  border: var(--card-hover-border);
+}
+
+.custom-meal-img-container {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--bg-accent), var(--bg-accent-secondary));
+}
+
+.custom-meal-icon-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color-tertiary));
+  color: white;
+  font-size: 3rem;
+  box-shadow: 0 8px 20px rgba(var(--primary-color-rgb), 0.3);
+  z-index: 1;
+}
+
+.custom-meal-icon-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  animation: spin 30s linear infinite;
+}
+
+.custom-meal-img-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  background-size: 60px 60px;
+  background-repeat: repeat;
+}
+
+.custom-meal-content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-meal-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.custom-meal-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+  color: var(--primary-color);
+}
+
+.custom-meal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--text-color);
+  line-height: 1.3;
+}
+
+.custom-meal-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+  font-size: 0.9rem;
+}
+
+.rating-stars {
+  display: flex;
+  margin-right: 0.5rem;
+}
+
+.custom-meal-description {
+  color: var(--text-color-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.custom-meal-footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid rgba(var(--primary-color-rgb), 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.custom-meal-price {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+}
+
+.custom-meal-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--hover-transition);
+}
+
+.custom-meal-button:hover {
+  background-color: var(--primary-color);
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.custom-meal-carousel-controls {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.carousel-control-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--hover-transition);
+}
+
+.carousel-control-button:hover {
+  transform: scale(1.1);
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.carousel-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--border-color);
+  cursor: pointer;
+  transition: var(--hover-transition);
+}
+
+.carousel-indicator.active {
+  background-color: var(--primary-color);
+  transform: scale(1.2);
+}
+
+.custom-meal-icons {
+  display: flex;
+  margin-top: 1rem;
+  gap: 0.75rem;
+}
+
+.custom-meal-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+/* Food icon variations */
+.custom-meal-icon-1 { background-color: rgba(var(--primary-color-rgb), 0.1); color: var(--primary-color); }
+.custom-meal-icon-2 { background-color: rgba(var(--secondary-color-rgb), 0.1); color: var(--secondary-color); }
+.custom-meal-icon-3 { background-color: rgba(var(--accent-color-rgb), 0.1); color: var(--accent-color); }
+
+/* Dark mode adjustments */
+[data-theme="dark"] .custom-meal-img-container {
+  background: linear-gradient(135deg, #1a1a1a, #252525);
+}
+
+[data-theme="dark"] .custom-meal-icon-wrapper {
+  box-shadow: 0 8px 20px rgba(var(--primary-color-rgb), 0.5);
+}
+
+[data-theme="dark"] .custom-meal-tag {
+  background-color: rgba(var(--primary-color-rgb), 0.2);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .custom-meals-section {
+    padding: 4rem 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .custom-meal-img-container {
+    height: 180px;
+  }
+  
+  .custom-meal-icon-wrapper {
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
+  }
+  
+  .custom-meals-carousel .carousel-control-prev,
+  .custom-meals-carousel .carousel-control-next {
+    margin: 0;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .custom-meals-carousel .carousel-indicators {
+    bottom: -30px;
+  }
+}

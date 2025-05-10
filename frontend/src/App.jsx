@@ -14,6 +14,8 @@ import Footer from './components/layout/Footer'
 import Home from './pages/Home'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
+import ForgotPassword from './pages/auth/ForgotPassword'
+import ResetPassword from './pages/auth/ResetPassword'
 import RestaurantList from './pages/restaurants/RestaurantList'
 import RestaurantDetail from './pages/restaurants/RestaurantDetail'
 import CreateRestaurant from './pages/restaurants/CreateRestaurant'
@@ -31,9 +33,11 @@ import Checkout from './pages/cart/Checkout'
 import OrderHistory from './pages/orders/OrderHistory'
 import OrderDetail from './pages/orders/OrderDetail'
 import Profile from './pages/user/Profile'
+import EditProfile from './pages/user/EditProfile'
 import RestaurantDashboard from './pages/dashboard/RestaurantDashboard'
 import AdminDashboard from './pages/dashboard/AdminDashboard'
 import AdminUserForm from './pages/admin/AdminUserForm'
+import NotificationsPage from './pages/NotificationsPage'
 import NotFound from './pages/NotFound'
 
 // CSS
@@ -72,7 +76,7 @@ function App() {
 
   return (
     <Router>
-      <div className="app-container">
+      <div className="app-container bg-pattern-light bg-food-pattern">
         <ToastContainer position="top-right" autoClose={3000} />
         <Header />
         <main className="main-content">
@@ -81,6 +85,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password/:uid/:token" element={<ResetPassword />} />
             <Route path="/restaurants" element={<RestaurantList />} />
             <Route path="/restaurants/:id" element={<RestaurantDetail />} />
             <Route path="/meals" element={<AllMeals />} />
@@ -113,6 +119,16 @@ function App() {
             <Route path="/profile" element={
               <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
+            } />
+            <Route path="/edit-profile" element={
+              <ProtectedRoute>
+                <EditProfile />
+              </ProtectedRoute>
+            } />
+            <Route path="/notifications" element={
+              <ProtectedRoute>
+                <NotificationsPage />
               </ProtectedRoute>
             } />
             
